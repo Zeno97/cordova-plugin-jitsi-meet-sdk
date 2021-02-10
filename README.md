@@ -17,7 +17,7 @@ cordova plugin add cordova-plugin-jitsi-meet-sdk
 ```
 
 ## Usage
-All paramenter are optional except for room. You need to specify at least the room name.
+All paramenters are optional except for room. You need to specify at least the room name.
 
 - If serverURL is not specified by default is "https://meet.jit.si".
 
