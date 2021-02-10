@@ -4,7 +4,7 @@ All options, feature flags and listeners are available.
 All feature flags available are here: https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/flags/constants.js
 
 # Installation
-`cordova plugin add cordova-plugin-jitsi-meet-sdk
+cordova plugin add cordova-plugin-jitsi-meet-sdk
 
 # Usage
 All paramenter are optional except for room. You need to specify at least the room name.
@@ -13,48 +13,18 @@ All feature flags not specified by default are false.
 All boolean options by default are false.
 All string options by default are empty.
 
-This is the minimal setup
-
-FirebasePlugin.startJitsiMeet(
+This is the minimal setup to enter into a conference
+```js
+JitsiMeet.startJitsiMeet(
 {
     room: "MyAmazingRoom",
-}, 
-function(listener){
-    // a listener has been fired!
-    console.log(listener);
-    
-    switch(listener){
-        case "onConferenceWillJoin":
-            //you are going to join into conference
-            break;
-        case "onConferenceJoined":
-            //you are full intered into conference
-            break;
-        case "onConferenceTerminated":
-            //you left the conference
-            break;
-        case "onCreate":
-            //JitsiMeetActivity is created
-            break;
-        case "onDestroy":
-            //JitsiMeetActivity is destroyed
-            break;
-        case "onBackPressed":
-            //has been pressed backbutton inside JitsiMeetActivity
-            break;
-        case "onNewIntent":
-            //JitsiMeetActivity has fired onNewIntent event
-            break;
-        case "onUserLeaveHint":
-            //JitsiMeetActivity is in Picture in Picture mode
-            break;
-    }
 });
+```
 
 
-Instead this is a complete example.
-
-FirebasePlugin.startJitsiMeet(
+And this is a complete example
+```js
+JitsiMeet.startJitsiMeet(
 {
     serverURL: "https://meet.jit.si",
     room: "MyAmazingRoom",
@@ -113,3 +83,15 @@ FirebasePlugin.startJitsiMeet(
             break;
     }
 });
+```
+
+
+# Issues
+The plugin will receive updates and fixes. In the future will be developed also an ios version. Write in the Issues section for any problem.
+If you are looking for a minimal implementation that works both for Android and iOS i suggest this plugin https://github.com/findmate/cordova-plugin-jitsi-meet
+
+# About me
+I am available for freelance work. I work with Cordova for Android platform (i can give a basic support for iOS), Android app development and web development.
+Write me at zeon97@outlook.it
+
+# Thanks!
