@@ -1,12 +1,22 @@
 # cordova-plugin-jitsi-meet-sdk
 Cordova plugin for Jitsi Meet React Native SDK. Actually is Android Only.
+
 All options, feature flags and listeners are available. 
-All feature flags available are here: https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/flags/constants.js
 
-# Installation
+All feature flags available can be found here: https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/flags/constants.js
+
+## Supported Platforms
+- __Android__ 
+
+## Installation
+The plugin can be installed via Cordova-CLI
+
+Install the latest head version
+```
 cordova plugin add cordova-plugin-jitsi-meet-sdk
+```
 
-# Usage
+## Usage
 All paramenter are optional except for room. You need to specify at least the room name.
 If serverURL is not specified by default is "https://meet.jit.si".
 All feature flags not specified by default are false.
@@ -86,12 +96,14 @@ JitsiMeet.startJitsiMeet(
 ```
 
 
-# Issues
+## Issues
 The plugin will receive updates and fixes. In the future will be developed also an ios version. Write in the Issues section for any problem.
+
 If you are looking for a minimal implementation that works both for Android and iOS i suggest this plugin https://github.com/findmate/cordova-plugin-jitsi-meet
 
-# About me
+## About me
 I am available for freelance work. I work with Cordova for Android platform (i can give a basic support for iOS), Android app development and web development.
+
 Write me at zeon97@outlook.it
 
-# Thanks!
+### Thanks!
