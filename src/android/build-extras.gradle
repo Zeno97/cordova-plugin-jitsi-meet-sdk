@@ -1,0 +1,20 @@
+ext.cdvMinSdkVersion = 26
+
+android {
+	repositories {
+		google()
+		jcenter()
+		maven {
+			url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
+		}
+	}
+
+	dependencies {
+		implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }
+	}
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+}
