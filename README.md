@@ -21,7 +21,7 @@ All paramenters are optional except for room. You need to specify at least the r
 
 - If serverURL is not specified by default is "https://meet.jit.si".
 
-- All feature flags not specified by default are false.
+- All feature flags not specified are in their default value.
 
 - All boolean options by default are false.
 
@@ -75,7 +75,7 @@ JitsiMeet.startJitsiMeet(
             //you are going to join into conference
             break;
         case "onConferenceJoined":
-            //you are full intered into conference
+            //you are full entered into conference
             break;
         case "onConferenceTerminated":
             //you left the conference
