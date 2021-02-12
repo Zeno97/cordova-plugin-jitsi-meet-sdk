@@ -21,6 +21,11 @@ public class JitsiMeetActivity extends FragmentActivity implements JitsiMeetActi
    protected static final String TAG = JitsiMeetActivity.class.getSimpleName();
    private static final String ACTION_JITSI_MEET_CONFERENCE = "org.jitsi.meet.CONFERENCE";
    private static final String JITSI_MEET_CONFERENCE_OPTIONS = "JitsiMeetConferenceOptions";
+   private static JitsiMeetActivity instance = null;
+   
+   public static JitsiMeetActivity getInstance(){
+      return instance;
+   }
 
    public static void launch(Context context, JitsiMeetConferenceOptions options) {
       Intent intent = new Intent(context, JitsiMeetActivity.class);
@@ -36,6 +41,7 @@ public class JitsiMeetActivity extends FragmentActivity implements JitsiMeetActi
 
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+	   instance = this;
       if(JitsiMeet.jitsiCallbackContext != null) {
          PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"onCreate");
          pluginResult.setKeepCallback(true);
@@ -51,6 +57,7 @@ public class JitsiMeetActivity extends FragmentActivity implements JitsiMeetActi
 
    public void onDestroy() {
       this.leave();
+	   instance = null;
       if(JitsiMeet.jitsiCallbackContext != null) {
          PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"onDestroy");
          pluginResult.setKeepCallback(true);
@@ -68,7 +75,8 @@ public class JitsiMeetActivity extends FragmentActivity implements JitsiMeetActi
 
    public void finish() {
       this.leave();
-      super.finish();
+      super.finishAndRemoveTask();
+      //super.finish();//Do you have issue? Uncomment this and comment the line above - By Max, the great Super Sayan!
    }
 
    protected JitsiMeetView getJitsiView() {

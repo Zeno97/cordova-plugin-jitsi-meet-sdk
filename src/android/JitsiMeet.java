@@ -50,9 +50,12 @@ public class JitsiMeet extends CordovaPlugin {
      * @return                  True if the action was valid, false if not.
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("startJitsiMeet")) {
+        if (action.equals("startConference")) {
             jitsiCallbackContext = callbackContext;
-            this.startJitsiMeet(cordova.getContext(), args.getJSONObject(0));
+            JitsiMeet.startConference(cordova.getContext(), args.getJSONObject(0));
+        }
+        else if(action.equals("disposeConference")){
+            cordova.getActivity().runOnUiThread(() -> JitsiMeet.disposeConference(callbackContext));
         }
         else {
             return false;
@@ -60,7 +63,7 @@ public class JitsiMeet extends CordovaPlugin {
         return true;
     }
 
-    public static boolean startJitsiMeet(Context context, JSONObject JSONoptions) {
+    public static boolean startConference(Context context, JSONObject JSONoptions) {
         try {
             JitsiMeetUserInfo userInfo = new JitsiMeetUserInfo();
 
@@ -129,6 +132,19 @@ public class JitsiMeet extends CordovaPlugin {
             return true;
 
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean disposeConference(CallbackContext callbackContext) {
+        JitsiMeetActivity jitsiMeetActivity = JitsiMeetActivity.getInstance();
+        if (jitsiMeetActivity != null){
+            jitsiMeetActivity.finish();
+            callbackContext.success("success");
+            return true;
+        }
+        else {
+            callbackContext.error("JitsiMeet not started");
             return false;
         }
     }

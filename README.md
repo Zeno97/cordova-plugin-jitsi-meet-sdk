@@ -29,7 +29,7 @@ All paramenters are optional except for room. You need to specify at least the r
 
 This is the minimal setup to enter into a conference
 ```js
-JitsiMeet.startJitsiMeet(
+JitsiMeet.startConference(
 {
     room: "MyAmazingRoom",
 });
@@ -38,7 +38,7 @@ JitsiMeet.startJitsiMeet(
 
 And this is a complete example
 ```js
-JitsiMeet.startJitsiMeet(
+JitsiMeet.startConference(
 {
     serverURL: "https://meet.jit.si",
     room: "MyAmazingRoom",
@@ -99,6 +99,15 @@ JitsiMeet.startJitsiMeet(
 });
 ```
 
+## Close the conference
+```
+JitsiMeet.disposeConference(function(success){
+	console.log("You successfully closed your conference!");
+},function(error){
+	console.log("Something goes wrong. Check tab error in the console");
+	console.error(error);
+});
+```
 
 ## Issues
 The plugin will receive updates and fixes. In the future will be developed also an ios version. Write in the Issues section for any problem.
