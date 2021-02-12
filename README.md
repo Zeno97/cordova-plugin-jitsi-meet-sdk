@@ -100,7 +100,7 @@ JitsiMeet.startConference(
 ```
 
 ## Close the conference
-```
+```js
 JitsiMeet.disposeConference(function(success){
 	console.log("You successfully closed your conference!");
 },function(error){
