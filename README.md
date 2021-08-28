@@ -6,7 +6,7 @@ All options, feature flags and listeners are available.
 All feature flags available can be found here: https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/flags/constants.js
 
 ## Supported Platforms
-- __Android__ 
+- __Android__ >= 26
 
 ## Installation
 The plugin can be installed via Cordova-CLI
@@ -71,29 +71,38 @@ JitsiMeet.startConference(
     console.log(listener);
     
     switch(listener){
-        case "onConferenceWillJoin":
-            //you are going to join into conference
+        case "CONFERENCE_JOINED":
+            //Broadcasted when a conference was joined.
             break;
-        case "onConferenceJoined":
-            //you are full entered into conference
+        case "CONFERENCE_TERMINATED":
+            //Broadcasted when the active conference ends, be it because of user choice or because of a failure.
             break;
-        case "onConferenceTerminated":
-            //you left the conference
+        case "CONFERENCE_WILL_JOIN":
+            //Broadcasted before a conference is joined. 
             break;
-        case "onCreate":
-            //JitsiMeetActivity is created
+        case "AUDIO_MUTED_CHANGED":
+            //Broadcasted when audioMuted state changed
             break;
-        case "onDestroy":
-            //JitsiMeetActivity is destroyed
+        case "VIDEO_MUTED_CHANGED":
+            //Broadcasted when videoMuted state changed
             break;
-        case "onBackPressed":
-            //has been pressed backbutton inside JitsiMeetActivity
+        case "PARTICIPANT_JOINED":
+            //Broadcasted when a participant has joined the conference. 
             break;
-        case "onNewIntent":
-            //JitsiMeetActivity has fired onNewIntent event
+        case "PARTICIPANT_LEFT":
+            //Broadcasted when a participant has joined the conference.
             break;
-        case "onUserLeaveHint":
-            //JitsiMeetActivity is in Picture in Picture mode
+        case "ENDPOINT_TEXT_MESSAGE_RECEIVED":
+            //Broadcasted when an endpoint text message is received. 
+            break;
+		case "PARTICIPANTS_INFO_RETRIEVED":
+            //Broadcasted when a RETRIEVE_PARTICIPANTS_INFO action is called. 
+            break;
+		case "CHAT_MESSAGE_RECEIVED":
+            //Broadcasted when a chat text message is received.
+            break;
+		case "CHAT_TOGGLED":
+            //Broadcasted when the chat dialog is opened or closed.
             break;
     }
 });
@@ -108,6 +117,43 @@ JitsiMeet.disposeConference(function(success){
 	console.error(error);
 });
 ```
+
+##Supported events
+CONFERENCE_JOINED
+Broadcasted when a conference was joined. The data HashMap contains a url key with the conference URL.
+
+CONFERENCE_TERMINATED
+Broadcasted when the active conference ends, be it because of user choice or because of a failure. The data HashMap contains an error key with the error and a url key with the conference URL. If the conference finished gracefully no error key will be present.
+
+CONFERENCE_WILL_JOIN
+Broadcasted before a conference is joined. The data HashMap contains a url key with the conference URL.
+
+AUDIO_MUTED_CHANGED
+Broadcasted when audioMuted state changed. The data HashMap contains a muted key with state of the audioMuted for the localParticipant.
+
+VIDEO_MUTED_CHANGED
+Broadcasted when videoMuted state changed. The data HashMap contains a muted key with state of the videoMuted for the localParticipant.
+
+PARTICIPANT_JOINED
+Broadcasted when a participant has joined the conference. The data HashMap contains information of the participant that has joined. Depending of whether the participant is the local one or not, some of them are present/missing. isLocal email name participantId
+
+PARTICIPANT_LEFT
+Broadcasted when a participant has joined the conference. The data HashMap contains information of the participant that has left. Depending of whether the participant is the local one or not, some of them are present/missing. isLocal email name participantId
+
+ENDPOINT_TEXT_MESSAGE_RECEIVED
+Broadcasted when an endpoint text message is received. The data HashMap contains a senderId key with the participantId of the sender and a message key with the content.
+
+PARTICIPANTS_INFO_RETRIEVED
+Broadcasted when a RETRIEVE_PARTICIPANTS_INFO action is called. The data HashMap contains a participantsInfo key with a list of participants information and a requestId key with the id that was sent in the RETRIEVE_PARTICIPANTS_INFO action.
+
+CHAT_MESSAGE_RECEIVED
+Broadcasted when a chat text message is received. The data HashMap contains a senderId key with the participantId of the sender, a message key with the content, a isPrivate key with a boolean value and a timestamp key.
+
+CHAT_TOGGLED
+Broadcasted when the chat dialog is opened or closed. The data HashMap contains a isOpen key with a boolean value.
+
+##Broadcasting Actions
+Working in progress...
 
 ## Issues
 The plugin will receive updates and fixes. In the future will be developed also an ios version. Write in the Issues section for any problem.

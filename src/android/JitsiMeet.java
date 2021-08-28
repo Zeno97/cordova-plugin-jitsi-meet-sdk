@@ -18,13 +18,20 @@
 */
 package org.jitsi.meet.JitsiMeet;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.Log;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.PluginResult;
+import org.jitsi.meet.sdk.BroadcastEvent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +45,8 @@ import java.util.Map;
 
 public class JitsiMeet extends CordovaPlugin {
     public static final String TAG = "JitsiMeet";
-
+    public static JitsiMeetActivity jitsiMeetActivity = null;
+    private static JitsiMeet instance = null;
     public static CallbackContext jitsiCallbackContext;
 
     /**
@@ -50,6 +58,7 @@ public class JitsiMeet extends CordovaPlugin {
      * @return                  True if the action was valid, false if not.
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        instance = this;
         if (action.equals("startConference")) {
             jitsiCallbackContext = callbackContext;
             JitsiMeet.startConference(cordova.getContext(), args.getJSONObject(0));
@@ -62,6 +71,8 @@ public class JitsiMeet extends CordovaPlugin {
         }
         return true;
     }
+
+    public static JitsiMeet getInstance() { return instance; }
 
     public static boolean startConference(Context context, JSONObject JSONoptions) {
         try {
@@ -127,7 +138,141 @@ public class JitsiMeet extends CordovaPlugin {
 
             JitsiMeetConferenceOptions options = builder.build();
 
-            JitsiMeetActivity.launch(context,options);
+            //TODO: Finire di sviluppare eventi broadcast
+            BroadcastReceiver participantJoinedReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"PARTICIPANT_JOINED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.PARTICIPANT_JOINED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(participantJoinedReceiver, intentFilter);
+
+            //
+            BroadcastReceiver participantLeftReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"PARTICIPANT_LEFT");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.PARTICIPANT_LEFT.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(participantLeftReceiver, intentFilter);
+
+            //
+            BroadcastReceiver conferenceJoinedReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"CONFERENCE_JOINED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_JOINED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(conferenceJoinedReceiver, intentFilter);
+
+            //
+            BroadcastReceiver conferenceTerminatedReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"CONFERENCE_TERMINATED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_TERMINATED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(conferenceTerminatedReceiver, intentFilter);
+
+            //
+            BroadcastReceiver conferenceWillJoinReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"CONFERENCE_WILL_JOIN");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_WILL_JOIN.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(conferenceWillJoinReceiver, intentFilter);
+
+            //
+            BroadcastReceiver audioMutedChangedReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"AUDIO_MUTED_CHANGED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.AUDIO_MUTED_CHANGED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(audioMutedChangedReceiver, intentFilter);
+
+            //
+            BroadcastReceiver videoMutedChangedReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"VIDEO_MUTED_CHANGED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.VIDEO_MUTED_CHANGED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(videoMutedChangedReceiver, intentFilter);
+
+            //
+            BroadcastReceiver endpointTextMessageReceivedReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"ENDPOINT_TEXT_MESSAGE_RECEIVED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.ENDPOINT_TEXT_MESSAGE_RECEIVED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(endpointTextMessageReceivedReceiver, intentFilter);
+
+            //
+            BroadcastReceiver participantsInfoRetrievedReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"PARTICIPANTS_INFO_RETRIEVED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.PARTICIPANTS_INFO_RETRIEVED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(participantsInfoRetrievedReceiver, intentFilter);
+
+            //
+            BroadcastReceiver chatMessageReceivedReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"CHAT_MESSAGE_RECEIVED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.CHAT_MESSAGE_RECEIVED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(chatMessageReceivedReceiver, intentFilter);
+
+            //
+            BroadcastReceiver chatToggledReceiver = new BroadcastReceiver() {
+                public void onReceive(Context context, Intent intent) {
+                    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"CHAT_TOGGLED");
+                    pluginResult.setKeepCallback(true);
+                    jitsiCallbackContext.sendPluginResult(pluginResult);
+                }
+            };
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(BroadcastEvent.Type.CHAT_TOGGLED.getAction());
+            LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(chatToggledReceiver, intentFilter);
+
+
+
+            jitsiMeetActivity.launch(context,options);
 
             return true;
 
@@ -137,7 +282,6 @@ public class JitsiMeet extends CordovaPlugin {
     }
 
     public static boolean disposeConference(CallbackContext callbackContext) {
-        JitsiMeetActivity jitsiMeetActivity = JitsiMeetActivity.getInstance();
         if (jitsiMeetActivity != null){
             jitsiMeetActivity.finish();
             callbackContext.success("success");
