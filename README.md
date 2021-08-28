@@ -118,7 +118,7 @@ JitsiMeet.disposeConference(function(success){
 });
 ```
 
-##Supported events
+## Supported events
 
 CONFERENCE_JOINED
 Broadcasted when a conference was joined. The data HashMap contains a url key with the conference URL.
