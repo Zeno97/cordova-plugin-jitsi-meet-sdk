@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-jitsi-meet-sdk",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Cordova plugin with Jitsi Meet SDK features",
   "cordova": {
     "id": "cordova-plugin-jitsi-meet-sdk",
@@ -9,15 +9,9 @@
     ]
   },
   "keywords": [
-    "cordova",
-    "jitsi",
     "ecosystem:cordova",
     "cordova-android"
   ],
-  "scripts": {
-    "test": "npm run lint",
-    "lint": "eslint ."
-  },
   "author": "Apache Software Foundation",
   "license": "Apache-2.0",
   "repository": {
