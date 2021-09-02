@@ -120,40 +120,40 @@ JitsiMeet.disposeConference(function(success){
 
 ## Supported events
 
-CONFERENCE_JOINED
+### CONFERENCE_JOINED
 Broadcasted when a conference was joined. The data HashMap contains a url key with the conference URL.
 
-CONFERENCE_TERMINATED
+### CONFERENCE_TERMINATED
 Broadcasted when the active conference ends, be it because of user choice or because of a failure. The data HashMap contains an error key with the error and a url key with the conference URL. If the conference finished gracefully no error key will be present.
 
-CONFERENCE_WILL_JOIN
+### CONFERENCE_WILL_JOIN
 Broadcasted before a conference is joined. The data HashMap contains a url key with the conference URL.
 
-AUDIO_MUTED_CHANGED
+### AUDIO_MUTED_CHANGED
 Broadcasted when audioMuted state changed. The data HashMap contains a muted key with state of the audioMuted for the localParticipant.
 
-VIDEO_MUTED_CHANGED
+### VIDEO_MUTED_CHANGED
 Broadcasted when videoMuted state changed. The data HashMap contains a muted key with state of the videoMuted for the localParticipant.
 
-PARTICIPANT_JOINED
+### PARTICIPANT_JOINED
 Broadcasted when a participant has joined the conference. The data HashMap contains information of the participant that has joined. Depending of whether the participant is the local one or not, some of them are present/missing. isLocal email name participantId
 
-PARTICIPANT_LEFT
+### PARTICIPANT_LEFT
 Broadcasted when a participant has joined the conference. The data HashMap contains information of the participant that has left. Depending of whether the participant is the local one or not, some of them are present/missing. isLocal email name participantId
 
-ENDPOINT_TEXT_MESSAGE_RECEIVED
+### ENDPOINT_TEXT_MESSAGE_RECEIVED
 Broadcasted when an endpoint text message is received. The data HashMap contains a senderId key with the participantId of the sender and a message key with the content.
 
-PARTICIPANTS_INFO_RETRIEVED
+### PARTICIPANTS_INFO_RETRIEVED
 Broadcasted when a RETRIEVE_PARTICIPANTS_INFO action is called. The data HashMap contains a participantsInfo key with a list of participants information and a requestId key with the id that was sent in the RETRIEVE_PARTICIPANTS_INFO action.
 
-CHAT_MESSAGE_RECEIVED
+### CHAT_MESSAGE_RECEIVED
 Broadcasted when a chat text message is received. The data HashMap contains a senderId key with the participantId of the sender, a message key with the content, a isPrivate key with a boolean value and a timestamp key.
 
-CHAT_TOGGLED
+### CHAT_TOGGLED
 Broadcasted when the chat dialog is opened or closed. The data HashMap contains a isOpen key with a boolean value.
 
-##Broadcasting Actions
+## Broadcasting Actions
 Working in progress...
 
 ## Issues

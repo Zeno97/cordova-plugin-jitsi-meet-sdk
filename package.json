@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-jitsi-meet-sdk",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Cordova plugin with Jitsi Meet SDK features",
   "cordova": {
     "id": "cordova-plugin-jitsi-meet-sdk",
@@ -30,8 +30,8 @@
   },
   "engines": {
     "cordovaDependencies": {
-      "3.0.0": {
-	      "cordova-plugin-androidx": {}
+      ">0.0.1": {
+	      "cordova-plugin-androidx": ">0.0.1"
       }
     }
   }
