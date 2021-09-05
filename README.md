@@ -1,5 +1,5 @@
 # cordova-plugin-jitsi-meet-sdk
-Cordova plugin for Jitsi Meet React Native SDK. Actually is Android Only.
+Cordova plugin for Jitsi Meet React Native SDK.
 
 All options, feature flags and listeners are available. 
 
@@ -7,6 +7,7 @@ All feature flags available can be found here: https://github.com/jitsi/jitsi-me
 
 ## Supported Platforms
 - __Android__ >= 26
+- __iOS__
 
 ## Installation
 The plugin can be installed via Cordova-CLI
@@ -157,13 +158,9 @@ Broadcasted when the chat dialog is opened or closed. The data HashMap contains 
 Working in progress...
 
 ## Issues
-The plugin will receive updates and fixes. In the future will be developed also an ios version. Write in the Issues section for any problem.
-
-If you are looking for a minimal implementation that works both for Android and iOS i suggest this plugin https://github.com/findmate/cordova-plugin-jitsi-meet
+The plugin will receive updates and fixes. Write in the Issues section for any problem.
 
 ## About me
-I am available for freelance work. I work with Cordova for Android platform (i can give a basic support for iOS), Android app development and web development.
-
-Write me at zeon97@outlook.it
+You can email me at zeon97@outlook.it
 
 ### Thanks!
