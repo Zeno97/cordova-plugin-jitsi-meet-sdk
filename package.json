@@ -1,6 +1,6 @@
 {
   "_from": "cordova-plugin-jitsi-meet-sdk",
-  "_id": "cordova-plugin-jitsi-meet-sdk@4.0.0",
+  "_id": "cordova-plugin-jitsi-meet-sdk@4.0.1",
   "_inBundle": false,
   "_integrity": "sha512-lzNK5inPO9IYII3gr+C2fqsADdETYz2vjxcXPijX2qWnYe7Nb8MD224DlLiYvHwvxG3xfU0xDa70MoZHlWtF0Q==",
   "_location": "/cordova-plugin-jitsi-meet-sdk",
@@ -33,7 +33,8 @@
   "cordova": {
     "id": "cordova-plugin-jitsi-meet-sdk",
     "platforms": [
-      "android"
+      "android",
+	  "ios"
     ]
   },
   "deprecated": false,
@@ -61,5 +62,5 @@
     "lint": "eslint .",
     "test": "npm run lint"
   },
-  "version": "4.0.0"
+  "version": "4.0.1"
 }

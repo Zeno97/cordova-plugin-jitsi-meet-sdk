@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSString *room;
 @property (nonatomic, strong) JitsiMeetView *jitsiMeetView;
 @property (nonatomic, strong) NSString *lastCallbackId;
+@property (nonatomic, strong) CDVPluginResult* result;
 
 // Start che jitsi meet conference
 - (void)startConference:(CDVInvokedUrlCommand*)command;

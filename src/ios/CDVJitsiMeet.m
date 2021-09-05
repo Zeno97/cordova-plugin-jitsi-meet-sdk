@@ -25,9 +25,6 @@
 
 - (void)startConference:(CDVInvokedUrlCommand*)command
 {
-    
-    //https://github.com/findmate/cordova-plugin-jitsi-meet/blob/master/src/ios/JitsiPlugin.mm
-    
     NSDictionary* meetingOptions = [command.arguments objectAtIndex:0];
     
     if([meetingOptions isKindOfClass:[NSDictionary class]] == false){
@@ -46,9 +43,11 @@
         serverURL = @"https://meet.jit.si";
     }
     
-    
-    
     self.lastCallbackId = command.callbackId;
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                 messageAsString:@"ok"];
+    [self.result setKeepCallbackAsBool:YES];
+    
     self.jitsiMeetView = [[JitsiMeetView alloc] initWithFrame:self.viewController.view.frame];
     self.jitsiMeetView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.jitsiMeetView.delegate = self;
@@ -106,6 +105,7 @@
 - (void)disposeConference:(CDVInvokedUrlCommand*)command
 {
     self.lastCallbackId = nil;
+    self.result = nil;
     if(self.jitsiMeetView){
         [self.jitsiMeetView removeFromSuperview];
         self.jitsiMeetView = nil;
@@ -115,33 +115,30 @@
 - (void)conferenceWillJoin:(NSDictionary *)data {
     NSLog(@"About to join conference %@", self.room);
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"CONFERENCE_WILL_JOIN"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)conferenceJoined:(NSDictionary *)data {
     NSLog(@"Conference %@ joined", self.room);
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"CONFERENCE_JOINED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)conferenceTerminated:(NSDictionary *)data {
     NSLog(@"Conference %@ terminated", self.room);
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"CONFERENCE_TERMINATED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
     
     if(self.jitsiMeetView){
@@ -153,88 +150,80 @@
 - (void)participantJoined:(NSDictionary *)data {
     NSLog(@"Participant joined");
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"PARTICIPANT_JOINED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)participantLeft:(NSDictionary *)data {
     NSLog(@"Participant left");
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"PARTICIPANT_LEFT"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)audioMutedChanged:(NSDictionary *)data {
     NSLog(@"Audio muted changed");
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"AUDIO_MUTED_CHANGED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)videoMutedChanged:(NSDictionary *)data {
     NSLog(@"Video muted changed");
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"VIDEO_MUTED_CHANGED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)endpointTextMessageReceived:(NSDictionary *)data {
     NSLog(@"Endpoint text message received");
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result= [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"ENDPOINT_TEXT_MESSAGE_RECEIVED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)chatToggled:(NSDictionary *)data {
     NSLog(@"Chat toggled");
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"CHAT_TOGGLED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)chatMessageReceived:(NSDictionary *)data {
     NSLog(@"Chat message received");
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"CHAT_MESSAGE_RECEIVED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 
 - (void)screenShareToggled:(NSDictionary *)data {
     NSLog(@"Screen share toggled");
     
-    CDVPluginResult* result;
-    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+    self.result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsString:@"SCREEN_SHARE_TOGGLED"];
-
-    [self.commandDelegate sendPluginResult:result
+    [self.result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:self.result
                                 callbackId:self.lastCallbackId];
 }
 @end
