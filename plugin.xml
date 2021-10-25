@@ -42,12 +42,12 @@
                 <param name="android-package" value="org.jitsi.meet.JitsiMeet.JitsiMeet"/>
             </feature>
         </config-file>
-		
+
 		<dependency id="cordova-plugin-androidx"/>
 
 
         <source-file src="src/android/JitsiMeet.java" target-dir="src/org/jitsi/meet/JitsiMeet" />
-		
+
 		<framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
     </platform>
 
@@ -64,6 +64,10 @@
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+            <string>For meeting purpose</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSCalendarsUsageDescription">
             <string>For meeting purpose</string>
         </config-file>
 
