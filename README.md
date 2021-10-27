@@ -97,13 +97,13 @@ JitsiMeet.startConference(
             //Broadcasted when an endpoint text message is received. 
             break;
 	case "PARTICIPANTS_INFO_RETRIEVED":
-		//Broadcasted when a RETRIEVE_PARTICIPANTS_INFO action is called. 
+	    //Broadcasted when a RETRIEVE_PARTICIPANTS_INFO action is called. 
             break;
 	case "CHAT_MESSAGE_RECEIVED":
-		//Broadcasted when a chat text message is received.
+	    //Broadcasted when a chat text message is received.
             break;
 	case "CHAT_TOGGLED":
-		//Broadcasted when the chat dialog is opened or closed.
+	    //Broadcasted when the chat dialog is opened or closed.
             break;
     }
 });
