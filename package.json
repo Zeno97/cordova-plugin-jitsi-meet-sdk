@@ -1,66 +1,32 @@
 {
-  "_from": "cordova-plugin-jitsi-meet-sdk",
-  "_id": "cordova-plugin-jitsi-meet-sdk@4.0.1",
-  "_inBundle": false,
-  "_integrity": "sha512-lzNK5inPO9IYII3gr+C2fqsADdETYz2vjxcXPijX2qWnYe7Nb8MD224DlLiYvHwvxG3xfU0xDa70MoZHlWtF0Q==",
-  "_location": "/cordova-plugin-jitsi-meet-sdk",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "cordova-plugin-jitsi-meet-sdk",
-    "name": "cordova-plugin-jitsi-meet-sdk",
-    "escapedName": "cordova-plugin-jitsi-meet-sdk",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#DEV:/",
-    "#USER"
-  ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-jitsi-meet-sdk/-/cordova-plugin-jitsi-meet-sdk-3.0.2.tgz",
-  "_shasum": "372b5b05ba30bae8cf5a56b085f989431729cb4b",
-  "_spec": "cordova-plugin-jitsi-meet-sdk",
-  "_where": "C:\\Users\\zeon9\\Desktop\\hello",
-  "author": {
-    "name": "Apache Software Foundation"
-  },
-  "bugs": {
-    "url": "https://github.com/Zeno97/cordova-plugin-jitsi-meet-sdk/issues"
-  },
-  "bundleDependencies": false,
+  "name": "cordova-plugin-jitsi-meet-sdk",
+  "version": "4.0.2",
+  "description": "Cordova plugin with Jitsi Meet SDK features",
   "cordova": {
     "id": "cordova-plugin-jitsi-meet-sdk",
     "platforms": [
       "android",
-	  "ios"
+      "ios"
     ]
   },
-  "deprecated": false,
-  "description": "Cordova plugin with Jitsi Meet SDK features",
-  "engines": {
-    "cordovaDependencies": {
-      ">0.0.1": {
-        "cordova-plugin-androidx": ">0.0.1"
-      }
-    }
-  },
-  "homepage": "https://github.com/Zeno97/cordova-plugin-jitsi-meet-sdk#readme",
-  "keywords": [
-    "ecosystem:cordova",
-    "cordova-android",
-	"cordova-ios"
-  ],
-  "license": "Apache-2.0",
-  "name": "cordova-plugin-jitsi-meet-sdk",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Zeno97/cordova-plugin-jitsi-meet-sdk.git"
   },
-  "scripts": {
-    "lint": "eslint .",
-    "test": "npm run lint"
+  "keywords": [
+    "cordova",
+    "jitsi",
+    "sdk",
+    "android",
+    "ios",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Massimiliano Coppola",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/Zeno97/cordova-plugin-jitsi-meet-sdk/issues"
   },
-  "version": "4.0.1"
+  "homepage": "https://github.com/Zeno97/cordova-plugin-jitsi-meet-sdk#readme"
 }
