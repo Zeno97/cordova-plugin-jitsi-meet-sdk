@@ -6,7 +6,7 @@ All options, feature flags and listeners are available.
 All feature flags available can be found here: https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/flags/constants.js
 
 ## Supported Platforms
-- __Android__ >= 26
+- __Android__ >= 23
 - __iOS__
 
 ## Installation
