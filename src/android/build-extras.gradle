@@ -1,4 +1,4 @@
-ext.cdvMinSdkVersion = 26
+ext.cdvMinSdkVersion = 23
 
 android {
 	repositories {
