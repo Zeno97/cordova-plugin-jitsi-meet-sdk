@@ -218,6 +218,9 @@ public class JitsiMeet extends CordovaPlugin {
                 PluginResult pluginResult = new PluginResult(PluginResult.Status.OK,"CONFERENCE_TERMINATED");
                 pluginResult.setKeepCallback(true);
                 jitsiCallbackContext.sendPluginResult(pluginResult);
+                   
+                Intent foregroundIntent = getForegroundIntent(instance.cordova.getContext());
+                instance.cordova.getContext().startActivity(foregroundIntent);
             }
         };
         intentFilter = new IntentFilter();
@@ -307,6 +310,20 @@ public class JitsiMeet extends CordovaPlugin {
         intentFilter = new IntentFilter();
         intentFilter.addAction(BroadcastEvent.Type.CHAT_TOGGLED.getAction());
         LocalBroadcastManager.getInstance(getInstance().cordova.getActivity()).registerReceiver(chatToggledReceiver, intentFilter);
+    }
+       
+    /**
+     * Get the foreground intent.
+     */
+    private Intent getForegroundIntent(Context app) {
+        Intent intent = app.getPackageManager().getLaunchIntentForPackage(app.getPackageName());
+
+        intent.addFlags(
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        return intent;
     }
 
 }
