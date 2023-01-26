@@ -71,7 +71,7 @@
         BOOL audioMuted = [[meetingOptions objectForKey:@"audioMuted"] boolValue];
         [builder setAudioMuted:audioMuted];
         
-        BOOL videoMuted = [[meetingOptions objectForKey:@"audioMuted"] boolValue];
+        BOOL videoMuted = [[meetingOptions objectForKey:@"videoMuted"] boolValue];
         [builder setVideoMuted:videoMuted];
         
         BOOL welcomePageEnabled = [[meetingOptions objectForKey:@"welcomePageEnabled"] boolValue];

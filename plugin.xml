@@ -43,12 +43,9 @@
             </feature>
         </config-file>
 
-		<dependency id="cordova-plugin-androidx"/>
-
-
         <source-file src="src/android/JitsiMeet.java" target-dir="src/org/jitsi/meet/JitsiMeet" />
+	<framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
 
-		<framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
     </platform>
 
     <!-- ios -->

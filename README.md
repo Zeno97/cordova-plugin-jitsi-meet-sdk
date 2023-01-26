@@ -63,7 +63,6 @@ JitsiMeet.startConference(
         "add-people.enabled": true,
         "calendar.enabled": true,
         "meeting-name.enabled": true,
-        "video-share.enabled": true,
         "meeting-password.enabled": true,
         "toolbox.alwaysVisible": true
     }
