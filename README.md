@@ -159,7 +159,7 @@ Working in progress...
 ## Issues
 The plugin will receive updates and fixes. Write in the Issues section for any problem.
 
-## About me
-You can email me at zeon97@outlook.it
+## I am looking Freelance work!
+You can email me at maxcoppola97@libero.it
 
 ### Thanks!
