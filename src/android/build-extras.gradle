@@ -5,7 +5,12 @@ android {
 		google()
 		jcenter()
 		maven {
-			url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
+		    url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
+			content {
+                		includeGroup("org.jitsi.react")
+                		includeGroup("org.webkit")
+                		includeGroupByRegex("com.facebook.*")
+            		}
 		}
 	}
 
